@@ -13,7 +13,7 @@ function getComputerChoice() {
     } else {
         choice = `scissors`;
     }
-    
+
     return choice;
 }
 
@@ -23,36 +23,40 @@ function playRound(playerSelection, computerSelection) {
     const playerChoice = playerSelection.toLowerCase();
 
     if (playerChoice === computerSelection) {
-        let winner = "noone"
+        winner = "noone"
         
     } else if (playerChoice == "rock" && computerSelection == "paper") {
-        let winner = "computer";
+        winner = "computer";
     } else if (playerChoice == "rock" && computerSelection == "scissors") {
-        let winner = "player";
+        winner = "player";
     } else if (playerChoice == "scissors" && computerSelection == "rock") {
-        let winner = "computer";
+        winner = "computer";
     } else if (playerChoice == "scissors" && computerSelection == "paper") {
-        let winner = "player";
+        winner = "player";
     } else if (playerChoice == "paper" && computerSelection == "scissors") {
-        let winner = "computer";
+        winner = "computer";
     } else if (playerChoice == "paper" && computerSelection == "rock") {
-        let winner = "player";
+        winner = "player";
     } else { 
-        let winner = "noone";
+        winner = "noone";
     }
-    console.log(playerChoice);
-    console.log(computerSelection);
 
-    if (winner === "noone") {
-        let win = `you both picked ${playerChoice}!, noone wins.`;
-    } else if(winner === "computer") {
-         let win = `You Lose! ${computerSelection} beats ${playerChoice}`;
+    if (winner == "noone") {
+        win = `you both picked ${playerChoice}!, noone wins.`;
+    } else if(winner == "computer") {
+        win = `You Lose! ${computerSelection} beats ${playerChoice}`;
     } else {
-        let win = `You win! ${playerChoice} beats ${computerSelection}`
+        win = `You win! ${playerChoice} beats ${computerSelection}`
     }
 
-    return win;
+    console.log(win);
 }
-let computerSelection = getComputerChoice();
-let playerSelection = "rock"; 
-playRound(playerSelection, computerSelection);
+
+function game() {
+    for(let i = 0; i < 5; i++ ){
+        playRound(prompt("Enter rock paper or scissors"), getComputerChoice());
+    }
+}
+
+
+game();
