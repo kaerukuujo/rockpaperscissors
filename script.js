@@ -51,12 +51,37 @@ function playRound(playerSelection, computerSelection) {
 
     console.log(win);
 }
+const container = document.querySelector('#container');
 
-function game() {
-    for(let i = 0; i < 5; i++ ){
-        playRound(prompt("Enter rock paper or scissors"), getComputerChoice());
-    }
-}
+const btn1 = document.createElement('button');
+btn1.textContent = "Rock";
+btn1.style.borderStyle = "solid";
+btn1.style.borderColor = "black";
+btn1.style.backgroundColor = "light blue";
+btn1.classList.add('btn');
+container.appendChild(btn1);
+
+const btn2 = document.createElement('button');
+btn1.textContent = "Paper";
+btn2.style.borderStyle = "solid";
+btn2.style.borderColor = "black";
+btn2.style.backgroundColor = "light blue";
+btn2.classList.add('btn');
+container.appendChild(btn2);
+
+const btn3 = document.createElement('button');
+btn1.textContent = "cissors";
+btn3.style.borderStyle = "solid";
+btn2.style.borderColor = "black";
+btn3.style.backgroundColor = "light blue";
+btn3.classList.add('btn');
+container.appendChild(btn3);
+
+// function game() {
+//     for(let i = 0; i < 5; i++ ){
+//         playRound(prompt("Enter rock paper or scissors"), getComputerChoice());
+//     }
+// }
 
 
 game();
