@@ -61,8 +61,11 @@ function playRound(playerSelection, computerSelection) {
 }
 
 const buttons = document.querySelectorAll('button');
+let runningScore = document.querySelector('#runningScore');
 const result = document.querySelector('#result');
 const para = document.createElement('p');
+const paraScore1 = document.createElement('span');
+const paraScore2 = document.createElement('span');
 let gameLength = 0;
 let playerPoints = 0;
 let computerPoints = 0;
@@ -72,12 +75,22 @@ buttons.forEach ((button) => {
         playRound(button.id, getComputerChoice());
         if(gameLength === 0){
             para.textContent = "";
+            paraScore1.textContent = "";
+            paraScore2.textContent = "";
         }
         
         if (winRound === "player") {
             playerPoints++;
+            paraScore1.textContent = `Player : ${playerPoints}     `;
+            paraScore2.textContent = `Computer : ${computerPoints}     `;
+            runningScore.appendChild(paraScore1);
+            runningScore.appendChild(paraScore2);
         } else if (winRound === "computer") {
             computerPoints++;
+            paraScore1.textContent = `Player : ${playerPoints}     `;
+            paraScore2.textContent = `Computer : ${computerPoints}     `;
+            runningScore.appendChild(paraScore1);
+            runningScore.appendChild(paraScore2);
         }
 
         gameLength++;
@@ -99,5 +112,12 @@ function roundEnd (playerPoints, computerPoints) {
         result.appendChild(para);
     }
 
-    gameLength = 0;
+    gameLength = 0;  
+    playerPoints = 0;
+    computerPoints = 0;  
+
+    paraScore1.textContent = ``;
+    paraScore2.textContent = ``;
+    runningScore.appendChild(paraScore1);
+    runningScore.appendChild(paraScore2);
 }
