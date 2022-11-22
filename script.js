@@ -17,6 +17,8 @@ function getComputerChoice() {
     return choice;
 }
 
+let winRound = "";
+
 function playRound(playerSelection, computerSelection) {
     let winner = " ";
     let win = " ";
@@ -27,18 +29,25 @@ function playRound(playerSelection, computerSelection) {
         
     } else if (playerChoice == "rock" && computerSelection == "paper") {
         winner = "computer";
+        winRound = "computer";
     } else if (playerChoice == "rock" && computerSelection == "scissors") {
         winner = "player";
+        winRound = "player";
     } else if (playerChoice == "scissors" && computerSelection == "rock") {
         winner = "computer";
+        winRound = "computer";
     } else if (playerChoice == "scissors" && computerSelection == "paper") {
         winner = "player";
+        winRound = "player";
     } else if (playerChoice == "paper" && computerSelection == "scissors") {
         winner = "computer";
+        winRound = "computer";
     } else if (playerChoice == "paper" && computerSelection == "rock") {
         winner = "player";
+        winRound = "player";
     } else { 
         winner = "noone";
+        winRound = "noone";
     }
 
     if (winner == "noone") {
@@ -49,39 +58,46 @@ function playRound(playerSelection, computerSelection) {
         win = `You win! ${playerChoice} beats ${computerSelection}`
     }
 
-    console.log(win);
 }
-const container = document.querySelector('#container');
 
-const btn1 = document.createElement('button');
-btn1.textContent = "Rock";
-btn1.style.borderStyle = "solid";
-btn1.style.borderColor = "black";
-btn1.style.backgroundColor = "light blue";
-btn1.classList.add('btn');
-container.appendChild(btn1);
+const buttons = document.querySelectorAll('button');
+const result = document.querySelector('#result');
+const para = document.createElement('p');
+let gameLength = 0;
+let playerPoints = 0;
+let computerPoints = 0;
 
-const btn2 = document.createElement('button');
-btn1.textContent = "Paper";
-btn2.style.borderStyle = "solid";
-btn2.style.borderColor = "black";
-btn2.style.backgroundColor = "light blue";
-btn2.classList.add('btn');
-container.appendChild(btn2);
+buttons.forEach ((button) => {
+    button.addEventListener('click', () => {
+        playRound(button.id, getComputerChoice());
+        if(gameLength === 0){
+            para.textContent = "";
+        }
+        
+        if (winRound === "player") {
+            playerPoints++;
+        } else if (winRound === "computer") {
+            computerPoints++;
+        }
 
-const btn3 = document.createElement('button');
-btn1.textContent = "cissors";
-btn3.style.borderStyle = "solid";
-btn2.style.borderColor = "black";
-btn3.style.backgroundColor = "light blue";
-btn3.classList.add('btn');
-container.appendChild(btn3);
+        gameLength++;
+        if(gameLength === 5){
+            roundEnd(playerPoints, computerPoints);
+        } 
+        console.log(gameLength);     
+    });    
+});
 
-// function game() {
-//     for(let i = 0; i < 5; i++ ){
-//         playRound(prompt("Enter rock paper or scissors"), getComputerChoice());
-//     }
-// }
+function roundEnd (playerPoints, computerPoints) {
+    if (playerPoints > computerPoints){
+        // const para = document.createElement('p');
+        para.textContent = `Congrats you won! ${playerPoints} to ${computerPoints}`;
+        result.appendChild(para);
+    } else if (playerPoints < computerPoints) {
+        // const para = document.createElement('p');
+        para.textContent = `Unlucky, the computer won ${computerPoints} to ${playerPoints}.`;
+        result.appendChild(para);
+    }
 
-
-game();
+    gameLength = 0;
+}
